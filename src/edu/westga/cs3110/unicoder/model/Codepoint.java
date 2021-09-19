@@ -27,6 +27,34 @@ public class Codepoint {
 		}
 		return this.toFourByteUTF8();
 	}
+	
+	private String toOneByteUTF8() {
+		String result = Integer.toHexString(this.rawData);
+		result = padZeroes(result, 2);
+		return result;
+	}
+	
+	private String toTwoByteUTF8() {
+		String result = "";
+		int formattedData  = 0b1100000010000000;
+		int firstByteMask  = 0b0000011111000000;
+		int secondByteMask = 0b0000000000111111;
+		
+		int firstByte = (firstByteMask & this.rawData);
+		int secondByte = (secondByteMask & this.rawData);
+		
+		firstByte <<= 2;
+		
+		formattedData |= firstByte;
+		formattedData |= secondByte;
+		
+		result = Integer.toHexString(formattedData);
+		
+		result = padZeroes(result, 4);
+		
+		return result;
+	}
+	
 		return null;
 	}
 }
