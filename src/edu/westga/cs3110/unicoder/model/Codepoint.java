@@ -22,7 +22,7 @@ public class Codepoint {
 		if (this.rawData < 0x0800) {
 			return this.toTwoByteUTF8();
 		}
-		if (this.rawData < 0x8000) {
+		if (this.rawData < 0x10000) {
 			return this.toThreeByteUTF8();
 		}
 		return this.toFourByteUTF8();
