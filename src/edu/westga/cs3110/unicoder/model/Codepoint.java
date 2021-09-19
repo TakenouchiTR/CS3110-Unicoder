@@ -56,7 +56,60 @@ public class Codepoint {
 	}
 	
 		return null;
+	private String toThreeByteUTF8() {
+		String result = "";
+		int formattedData  = 0b111000001000000010000000;
+		int firstByteMask  = 0b000000001111000000000000;
+		int secondByteMask = 0b000000000000111111000000;
+		int thirdByteMask  = 0b000000000000000000111111;
+		
+		int firstByte = (firstByteMask & this.rawData);
+		int secondByte = (secondByteMask & this.rawData);
+		int thirdByte = (thirdByteMask & this.rawData);
+		
+		firstByte <<= 4;
+		secondByte <<= 2;
+		
+		formattedData |= firstByte;
+		formattedData |= secondByte;
+		formattedData |= thirdByte;
+		
+		result = Integer.toHexString(formattedData);
+		
+		result = padZeroes(result, 4);
+		
+		return result;
 	}
+	
+	private String toFourByteUTF8() {
+		String result = "";
+		int formattedData  = 0b11110000_10000000_10000000_10000000;
+		int firstByteMask  = 0b00000000_00011100_00000000_00000000;
+		int secondByteMask = 0b00000000_00000011_11110000_00000000;
+		int thirdByteMask  = 0b00000000_00000000_00001111_11000000;
+		int fourthByteMask = 0b00000000_00000000_00000000_00111111;
+		
+		int firstByte = (firstByteMask & this.rawData);
+		int secondByte = (secondByteMask & this.rawData);
+		int thirdByte = (thirdByteMask & this.rawData);
+		int fourthByte = (fourthByteMask & this.rawData);
+		
+		firstByte <<= 6;
+		secondByte <<= 4;
+		thirdByte <<= 2;
+		
+		formattedData |= firstByte;
+		formattedData |= secondByte;
+		formattedData |= thirdByte;
+		formattedData |= fourthByte;
+		
+		result = Integer.toHexString(formattedData);
+		
+		result = padZeroes(result, 4);
+		
+		return result;
+	}
+	
 	private String padZeroes(String hex, int totalLength) {
 		StringBuilder sb = new StringBuilder(totalLength);
 		
@@ -68,3 +121,4 @@ public class Codepoint {
 		return sb.toString();
 	}
 }
+
