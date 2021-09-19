@@ -12,7 +12,7 @@ public class Codepoint {
 			throw new IllegalArgumentException("hexValue must not be empty");
 		}
 		
-		this.rawData = Integer.parseUnsignedInt(hexValue, 16);
+		this.rawData = Integer.parseInt(hexValue, 16);
 		
 		if (this.rawData > HIGHEST_VALUE) {
 			throw new IllegalArgumentException("Hex value must not be above 0x10FFFF.");
