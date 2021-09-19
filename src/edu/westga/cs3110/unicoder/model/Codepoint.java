@@ -23,8 +23,37 @@ public class Codepoint {
 		return null;
 	}
 	
-	public String toUTF16() {
-		return null;
+	public String toUTF16() throws Exception {
+		if (this.rawData < 0x10000) {
+			if (this.rawData > 0xD7FF && this.rawData < 0xE000) {
+				throw new Exception();
+			}
+			return toTwoByteUTF16();
+		}
+		
+		return toFourByteUTF16();
+	}
+	
+	private String toTwoByteUTF16() {
+		String result = String.format("%04X", this.rawData); 
+		return result;
+	}
+	
+	private String toFourByteUTF16() {
+		int highMask = 0b11111111110000000000;
+		int lowMask  = 0b00000000001111111111;
+		int p = rawData - 0x10000;
+		
+		int highSurrogate = 0xD800 + ((p & highMask) >> 10);
+		int lowSurrogate  = 0xDC00 + (p & lowMask);
+		
+		highSurrogate <<= 16;
+		
+		int surrogateCombination = highSurrogate | lowSurrogate;
+		
+		String result = String.format("%08X", surrogateCombination);
+		
+		return result;
 	}
 	
 	public String toUTF8() {
