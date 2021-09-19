@@ -57,4 +57,14 @@ public class Codepoint {
 	
 		return null;
 	}
+	private String padZeroes(String hex, int totalLength) {
+		StringBuilder sb = new StringBuilder(totalLength);
+		
+		for (int i = 0; i < totalLength - hex.length(); ++i) {
+			sb.append('0');
+		}
+		sb.append(hex);
+		
+		return sb.toString();
+	}
 }
