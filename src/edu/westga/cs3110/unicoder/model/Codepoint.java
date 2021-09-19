@@ -1,10 +1,10 @@
 package edu.westga.cs3110.unicoder.model;
 
 public class Codepoint {
-	private String hexValue;
+	private int rawData;
 	
 	public Codepoint(String hexValue) {
-		this.hexValue = hexValue;
+		this.rawData = Integer.parseInt(hexValue, 16);
 	}
 	
 	public String toUTF32() {
