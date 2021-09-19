@@ -18,4 +18,40 @@ public class TestConstructor {
 				"Check if exception is thrown with out of bounds value"
 		);
 	}
+	
+	@Test
+	void testHexIsEmpty() {
+		assertThrows(
+				IllegalArgumentException.class, 
+				() -> {new Codepoint("");},
+				"Check if exception is thrown when using empty string"
+		);
+	}
+	
+	@Test
+	void testHexIsNull() {
+		assertThrows(
+				IllegalArgumentException.class, 
+				() -> {new Codepoint(null);},
+				"Check if exception is thrown when using null string"
+		);
+	}
+	
+	@Test
+	void testHexUsesInvalidCharacters() {
+		assertThrows(
+				NumberFormatException.class, 
+				() -> {new Codepoint("ASDF");},
+				"Check if exception is thrown when using invalid characters"
+		);
+	}
+	
+	@Test
+	void testHexTooLong() {
+		assertThrows(
+				NumberFormatException.class, 
+				() -> {new Codepoint("1234567890");},
+				"Check if exception is thrown when hex is too long"
+		);
+	}
 }
