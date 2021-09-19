@@ -55,7 +55,6 @@ public class Codepoint {
 		return result;
 	}
 	
-		return null;
 	private String toThreeByteUTF8() {
 		String result = "";
 		int formattedData  = 0b111000001000000010000000;
