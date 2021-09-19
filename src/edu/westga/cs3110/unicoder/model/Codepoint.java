@@ -5,6 +5,13 @@ public class Codepoint {
 	private int rawData;
 	
 	public Codepoint(String hexValue) {
+		if (hexValue == null) {
+			throw new IllegalArgumentException("hexValue must not be null");
+		}
+		if (hexValue.isEmpty()) {
+			throw new IllegalArgumentException("hexValue must not be empty");
+		}
+		
 		this.rawData = Integer.parseInt(hexValue, 16);
 		
 		if (this.rawData > HIGHEST_VALUE) {
