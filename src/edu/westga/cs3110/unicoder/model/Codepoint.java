@@ -20,7 +20,8 @@ public class Codepoint {
 	}
 	
 	public String toUTF32() {
-		return null;
+		String result = String.format("%08X", this.rawData);
+		return result;
 	}
 	
 	public String toUTF16() throws Exception {
