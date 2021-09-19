@@ -35,7 +35,7 @@ public class Codepoint {
 	
 	private String toOneByteUTF8() {
 		String result = Integer.toHexString(this.rawData);
-		result = padZeroes(result, 2);
+		result = String.format("%02X", rawData);
 		return result;
 	}
 	
@@ -52,10 +52,8 @@ public class Codepoint {
 		
 		formattedData |= firstByte;
 		formattedData |= secondByte;
-		
-		result = Integer.toHexString(formattedData);
-		
-		result = padZeroes(result, 4);
+
+		result = String.format("%04X", formattedData);
 		
 		return result;
 	}
@@ -77,10 +75,8 @@ public class Codepoint {
 		formattedData |= firstByte;
 		formattedData |= secondByte;
 		formattedData |= thirdByte;
-		
-		result = Integer.toHexString(formattedData);
-		
-		result = padZeroes(result, 4);
+
+		result = String.format("%06X", formattedData);
 		
 		return result;
 	}
@@ -107,22 +103,9 @@ public class Codepoint {
 		formattedData |= thirdByte;
 		formattedData |= fourthByte;
 		
-		result = Integer.toHexString(formattedData);
-		
-		result = padZeroes(result, 4);
+		result = String.format("%02X", formattedData);
 		
 		return result;
-	}
-	
-	private String padZeroes(String hex, int totalLength) {
-		StringBuilder sb = new StringBuilder(totalLength);
-		
-		for (int i = 0; i < totalLength - hex.length(); ++i) {
-			sb.append('0');
-		}
-		sb.append(hex);
-		
-		return sb.toString();
 	}
 }
 
