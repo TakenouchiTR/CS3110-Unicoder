@@ -1,10 +1,15 @@
 package edu.westga.cs3110.unicoder.model;
 
 public class Codepoint {
+	private static final int HIGHEST_VALUE = 0x10FFFF; 
 	private int rawData;
 	
 	public Codepoint(String hexValue) {
 		this.rawData = Integer.parseInt(hexValue, 16);
+		
+		if (this.rawData > HIGHEST_VALUE) {
+			throw new IllegalArgumentException("Hex value must not be above 0x10FFFF.");
+		}
 	}
 	
 	public String toUTF32() {
