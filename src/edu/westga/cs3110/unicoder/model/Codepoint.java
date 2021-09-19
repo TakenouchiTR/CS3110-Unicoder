@@ -41,8 +41,7 @@ public class Codepoint {
 	}
 	
 	private String toOneByteUTF8() {
-		String result = Integer.toHexString(this.rawData);
-		result = String.format("%02X", rawData);
+		String result = String.format("%02X", this.rawData);
 		return result;
 	}
 	
