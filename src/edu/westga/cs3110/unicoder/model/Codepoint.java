@@ -111,11 +111,8 @@ public class Codepoint {
 		return result;
 	}
 	
-	public String toUTF16() throws Exception {
+	public String toUTF16() {
 		if (this.rawData < 0x10000) {
-			if (this.rawData > 0xD7FF && this.rawData < 0xE000) {
-				throw new Exception();
-			}
 			return toTwoByteUTF16();
 		}
 		
