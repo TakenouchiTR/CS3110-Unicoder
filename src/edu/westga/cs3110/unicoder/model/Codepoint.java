@@ -31,7 +31,9 @@ public class Codepoint {
 			throw new IllegalArgumentException("Hex value must not be above 0x10FFFF.");
 		}
 		if (isCodepointInSurrogateRange()) {
-			throw new IllegalArgumentException("Hex value must not be between 0xD800 and 0xDFFF.");
+			throw new IllegalArgumentException(
+					"Hex value must not be between 0xD800 and 0xDFFF."
+			);
 		}
 	}
 	
