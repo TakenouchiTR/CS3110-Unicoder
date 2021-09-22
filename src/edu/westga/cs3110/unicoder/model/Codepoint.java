@@ -1,11 +1,22 @@
 package edu.westga.cs3110.unicoder.model;
 
+/** Encode a given codepoint into UTF-8, UTF-16, or UTF-32
+ * 
+ * @author Shawn Carter
+ * @version Fall 2021
+ */
 public class Codepoint {
 	private static final int HIGHEST_VALUE = 0x10FFFF;
 	private static final int SURROGATE_RANGE_START = 0xD800;
 	private static final int SURROGATE_RANGE_END = 0xDFFF;
 	private int rawData;
 	
+	/** Creates a new Codepoint from a specified UTF codepoint
+	 * 
+	 * @precondition hexValue <= 0x10FFFF && !(hexValue >= 0xD800 && hexValue < 0xDFFF)
+	 * @postcondition None
+	 * 
+	 */
 	public Codepoint(String hexValue) {
 		if (hexValue == null) {
 			throw new IllegalArgumentException("hexValue must not be null");
@@ -24,6 +35,12 @@ public class Codepoint {
 		}
 	}
 	
+	/** Encodes the Codepoint with UTF-8 encoding
+	 * 
+	 * @precondition None
+	 * @postcondition None
+	 * 
+	 */
 	public String toUTF8() {
 		if (this.rawData < 0x0080) {
 			return this.toOneByteUTF8();
@@ -119,6 +136,12 @@ public class Codepoint {
 		return result;
 	}
 	
+	/** Encodes the Codepoint with UTF-16 encoding
+	 * 
+	 * @precondition None
+	 * @postcondition None
+	 * 
+	 */
 	public String toUTF16() {
 		if (this.rawData < 0x10000) {
 			return toTwoByteUTF16();
@@ -149,6 +172,12 @@ public class Codepoint {
 		return result;
 	}
 	
+	/** Encodes the Codepoint with UTF-32 encoding
+	 * 
+	 * @precondition None
+	 * @postcondition None
+	 * 
+	 */
 	public String toUTF32() {
 		String result = String.format("%08X", this.rawData);
 		return result;
