@@ -2,6 +2,8 @@ package edu.westga.cs3110.unicoder.model;
 
 public class Codepoint {
 	private static final int HIGHEST_VALUE = 0x10FFFF;
+	private static final int SURROGATE_RANGE_START = 0xD800;
+	private static final int SURROGATE_RANGE_END = 0xDFFF;
 	private int rawData;
 	
 	public Codepoint(String hexValue) {
@@ -16,6 +18,9 @@ public class Codepoint {
 		
 		if (isCodepointAboveMaxValue()) {
 			throw new IllegalArgumentException("Hex value must not be above 0x10FFFF.");
+		}
+		if (isCodepointInSurrogateRange()) {
+			throw new IllegalArgumentException("Hex value must not be between 0xD800 and 0xDFFF.");
 		}
 	}
 	
@@ -148,5 +153,8 @@ public class Codepoint {
 		return this.rawData > HIGHEST_VALUE;
 	}
 	
+	private boolean isCodepointInSurrogateRange() {
+		return this.rawData >= SURROGATE_RANGE_START && this.rawData < SURROGATE_RANGE_END;
+	}
 }
 
