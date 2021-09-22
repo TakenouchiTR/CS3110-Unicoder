@@ -1,7 +1,7 @@
 package edu.westga.cs3110.unicoder.model;
 
 public class Codepoint {
-	private static final int HIGHEST_VALUE = 0x10FFFF; 
+	private static final int HIGHEST_VALUE = 0x10FFFF;
 	private int rawData;
 	
 	public Codepoint(String hexValue) {
@@ -14,7 +14,7 @@ public class Codepoint {
 		
 		this.rawData = Integer.parseInt(hexValue, 16);
 		
-		if (this.rawData > HIGHEST_VALUE) {
+		if (isCodepointAboveMaxValue()) {
 			throw new IllegalArgumentException("Hex value must not be above 0x10FFFF.");
 		}
 	}
@@ -143,5 +143,10 @@ public class Codepoint {
 		String result = String.format("%08X", this.rawData);
 		return result;
 	}
+
+	private boolean isCodepointAboveMaxValue() {
+		return this.rawData > HIGHEST_VALUE;
+	}
+	
 }
 
