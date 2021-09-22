@@ -24,18 +24,6 @@ public class TestToUTF16 {
 	}
 	
 	@ParameterizedTest
-	@ValueSource( strings = {"D800", "DFFF"} )
-	void testInvalidBytes(String hexValue) {
-		Codepoint codepoint = new Codepoint(hexValue);
-		
-		assertThrows(
-				Exception.class, 
-				() -> {codepoint.toUTF16();},
-				"Check if exception is thrown when using an illegal UTF16 value"
-		);
-	}
-	
-	@ParameterizedTest
 	@CsvSource( {"10000,D800DC00", "10FFFF,DBFFDFFF", "106DF4,DBDBDDF4"} )
 	void testFourBytes(String hexValue, String expected) {
 		Codepoint codepoint = new Codepoint(hexValue);
