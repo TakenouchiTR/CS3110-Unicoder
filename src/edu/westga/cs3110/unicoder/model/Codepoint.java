@@ -36,7 +36,15 @@ public class Codepoint {
 		}
 		return this.toFourByteUTF8();
 	}
+
+	private boolean isCodepointAboveMaxValue() {
+		return this.rawData > HIGHEST_VALUE;
+	}
 	
+	private boolean isCodepointInSurrogateRange() {
+		return this.rawData >= SURROGATE_RANGE_START && this.rawData <= SURROGATE_RANGE_END;
+	}
+
 	private String toOneByteUTF8() {
 		String result = String.format("%02X", this.rawData);
 		return result;
@@ -144,14 +152,6 @@ public class Codepoint {
 	public String toUTF32() {
 		String result = String.format("%08X", this.rawData);
 		return result;
-	}
-
-	private boolean isCodepointAboveMaxValue() {
-		return this.rawData > HIGHEST_VALUE;
-	}
-	
-	private boolean isCodepointInSurrogateRange() {
-		return this.rawData >= SURROGATE_RANGE_START && this.rawData <= SURROGATE_RANGE_END;
 	}
 }
 
