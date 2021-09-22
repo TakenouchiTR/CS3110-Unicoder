@@ -54,4 +54,15 @@ public class TestConstructor {
 				"Check if exception is thrown when hex is too long"
 		);
 	}
+	
+	@ParameterizedTest
+	@ValueSource( strings = {"D800", "DFFF"} )
+	void testHexInSurrogateRange(String hexValue) {
+		assertThrows(
+				IllegalArgumentException.class, 
+				() -> {new Codepoint(hexValue);},
+				"Check if exception is thrown when hex is in the surrogate pair range"
+		);
+	}
+	
 }
