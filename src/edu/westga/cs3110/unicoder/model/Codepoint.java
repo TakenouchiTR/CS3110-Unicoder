@@ -151,7 +151,7 @@ public class Codepoint {
 	}
 	
 	private boolean isCodepointInSurrogateRange() {
-		return this.rawData >= SURROGATE_RANGE_START && this.rawData < SURROGATE_RANGE_END;
+		return this.rawData >= SURROGATE_RANGE_START && this.rawData <= SURROGATE_RANGE_END;
 	}
 }
 
